@@ -17,7 +17,22 @@ activities = []
 
 # Callback functions for user actions
 def add_activity_callback():
+    """
+    Callback for adding a new activity.
+    Opens a form for the user to enter activity details and submit.
+    """
+
     def submit_activity(type, start, end, date, rating):
+        """
+        Submits a new activity to the activity log.
+
+        Parameters:
+            type (str): The type of the activity.
+            start (str): The start time of the activity.
+            end (str): The end time of the activity.
+            date (str): The date of the activity.
+            rating (int): The user's rating of the activity.
+        """
         # Here you would include validation and possibly conversion (e.g., rating to int)
         activity = {
             "type": type,
@@ -36,13 +51,19 @@ def add_activity_callback():
 
 
 def view_log_callback():
-    # Open the full log view window
+    """
+    Callback for viewing the full activity log.
+    Opens a window displaying a list of all past activities.
+    """
     activities = get_recent_activities()
     create_full_log_view(root, activities)
 
 
 def get_recommendation_callback():
-    # This is a placeholder for the recommendation logic
+    """
+    Callback for getting activity recommendations.
+    This function will be replaced with actual recommendation logic.
+    """
     print("This will show activity recommendations.")
 
 
@@ -53,6 +74,7 @@ activities = get_recent_activities()
 root = tk.Tk()
 root.title("Leisure Time Tracker")
 
+# Create the UI components
 header_frame = create_header_frame(root)
 middle_section_frame = tk.Frame(root)
 middle_section_frame.pack(side=tk.TOP, fill="both", expand=True)
