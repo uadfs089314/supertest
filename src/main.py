@@ -46,14 +46,20 @@ def get_recommendation_callback():
     print("This will show activity recommendations.")
 
 
+# Load activities from the data file
+activities = get_recent_activities()
+
 # Initialize the main application window
 root = tk.Tk()
 root.title("Leisure Time Tracker")
 
-# Create and pack the UI components from ui_components.py
 header_frame = create_header_frame(root)
-recent_activities_frame = create_recent_activities_frame(root)
-calendar_frame = create_calendar_frame(root)
+middle_section_frame = tk.Frame(root)
+middle_section_frame.pack(side=tk.TOP, fill="both", expand=True)
+recent_activities_frame = create_recent_activities_frame(
+    middle_section_frame, activities
+)
+calendar_frame = create_calendar_frame(middle_section_frame)
 action_frame = create_action_frame(
     root, add_activity_callback, view_log_callback, get_recommendation_callback
 )

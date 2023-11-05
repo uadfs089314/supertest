@@ -12,13 +12,31 @@ def create_header_frame(root):
 
 
 # Function to create the recent activities frame
-def create_recent_activities_frame(root):
+def create_recent_activities_frame(root, activities):
     recent_activities_frame = tk.Frame(root)
     recent_activities_frame.pack(
         side=tk.LEFT, padx=10, pady=10, fill="both", expand=True
     )
     tk.Label(recent_activities_frame, text="Recent Activities").pack()
-    # Listbox or other widgets for recent activities will be added here
+
+    # Create a scrollbar
+    scrollbar = tk.Scrollbar(recent_activities_frame)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    # Create a Listbox and attach the scrollbar
+    activities_listbox = tk.Listbox(
+        recent_activities_frame, yscrollcommand=scrollbar.set
+    )
+    for activity in activities:
+        activities_listbox.insert(
+            tk.END,
+            f"{activity['date']}: {activity['type']} - Rating: {activity['rating']}",
+        )
+    activities_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+    # Configure the scrollbar
+    scrollbar.config(command=activities_listbox.yview)
+
     return recent_activities_frame
 
 
@@ -27,7 +45,11 @@ def create_calendar_frame(root):
     calendar_frame = tk.Frame(root)
     calendar_frame.pack(side=tk.RIGHT, padx=10, pady=10, fill="both", expand=True)
     tk.Label(calendar_frame, text="Your Calendar").pack()
-    # Calendar widget or recommendations list will be added here
+
+    # Create a Calendar widget
+    cal = Calendar(calendar_frame, selectmode="day")
+    cal.pack(pady=20)
+
     return calendar_frame
 
 
@@ -36,7 +58,7 @@ def create_action_frame(
     root, add_activity_callback, view_log_callback, get_recommendation_callback
 ):
     action_frame = tk.Frame(root)
-    action_frame.pack(pady=10)
+    action_frame.pack(side=tk.BOTTOM, pady=10)
     tk.Button(
         action_frame, text="Add New Activity", command=add_activity_callback
     ).pack(side=tk.LEFT)
