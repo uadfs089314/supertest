@@ -1,4 +1,6 @@
 import tkinter as tk
+
+# Our own imports
 from ui_components import (
     create_header_frame,
     create_recent_activities_frame,
@@ -7,6 +9,7 @@ from ui_components import (
     create_add_activity_form,
     create_full_log_view,
 )
+from data_management import add_activity, get_recent_activities
 
 # This is your main application data structure for activities
 activities = []
@@ -23,7 +26,7 @@ def add_activity_callback():
             "date": date,
             "rating": int(rating),
         }
-        activities.append(activity)
+        add_activity(activity)
         # Close the add activity window after submission
         add_activity_window.destroy()
         # Refresh the recent activities list or other UI components as needed
@@ -34,6 +37,7 @@ def add_activity_callback():
 
 def view_log_callback():
     # Open the full log view window
+    activities = get_recent_activities()
     create_full_log_view(root, activities)
 
 
