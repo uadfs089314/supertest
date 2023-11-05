@@ -163,13 +163,13 @@ def add_activity_form():
     end_entry = tk.Entry(add_window)
     end_entry.grid(row=2, column=1)
 
-    tk.Label(add_window, text="Date").grid(row=4, column=0)
+    tk.Label(add_window, text="Date").grid(row=3, column=0)
     date_entry = tk.Entry(add_window)
-    date_entry.grid(row=4, column=1)
+    date_entry.grid(row=3, column=1)
 
-    tk.Label(add_window, text="Rating").grid(row=3, column=0)
+    tk.Label(add_window, text="Rating").grid(row=4, column=0)
     rating_entry = tk.Entry(add_window)
-    rating_entry.grid(row=3, column=1)
+    rating_entry.grid(row=4, column=1)
 
     # Function to handle the addition of a new activity
     def add_activity():
@@ -198,7 +198,7 @@ def add_activity_form():
 
     # Button to submit the new activity
     submit_button = tk.Button(add_window, text="Add Activity", command=add_activity)
-    submit_button.grid(row=4, column=0, columnspan=2)
+    submit_button.grid(row=5, column=0, columnspan=2)
 
 
 # Function to save activities to a file
